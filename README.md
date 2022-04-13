@@ -7,12 +7,12 @@
 pip install -r requirements.txt
 ```
 
-## Run service
+## Run the service
 ```bash
 python src\app.py
 ```
 
-## Test with client
+## Test with a client
 You can use the client_example.py script to feed the service.
 The script already has some data to use.
 
