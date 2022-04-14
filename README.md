@@ -1,18 +1,18 @@
-# Events Evidence Service
+##Events Evidence Service
 
-## Prerequisites
+### Prerequisites
 - Python 3.9
-## Installation
+### Installation
 ```bash
 pip install -r requirements.txt
 ```
 
-## Run the service
+### Run the service
 ```bash
 python src\app.py
 ```
 
-## Test with a client
+### Test with a client
 You can use the client_example.py script to feed the service.
 The script already has some data to use.
 
@@ -20,25 +20,49 @@ The script already has some data to use.
 python client_example.py
 ```
 
-## How service works
-The service gets from client evidence request and a parsing configuration. \
-with the parsing configuration, the service know which data to extract from evidence and generates table-structured JSON.
-
-### How to create a parser
-parser configuration is a json based structure which its keys are the table headers and its values are the key path to the value to extract from the evidence
-####example
-- parser:
-```json
-{
-    "id": [["user_details", "id"]],
-    "full name": [["user_details", "first_name"], ["user_details", "last_name"]],
-    "email": [["user_details", "email"]],
-    "updated_at": [["user_details", "updated_at"]],
-    "MFA enabled": [["security", "mfa_enabled"]],
-    "MFA enforced": [["security", "mfa_enforced"]]
-}
-```
-- evidence:
+####Service api specifications
+- Protocol: ```HTTP```, Port: ```5000```
+- Paths:
+    - /parse
+        - Desciption: "Generates a table of evidence data using a given parsing_configuration"
+        - Method: ```POST```
+        - Request:
+            - headers:
+                - Content-type: ```application/json```
+            - body:
+                ```json
+                {
+                  "parsing_configuration": <json object>,
+                  "payload": {"evidence_id": <number>, "evidence_data": <list of json objects>}
+                }
+                ```
+        - Response:
+            - headers:
+                - Content-type: ```application/json```
+            - body:
+                ```json
+                {
+                    "evidence_id": <number>,
+                    "headers": <list of strings>,
+                    "rows": <list of objects>
+                }
+                ```
+        - ```parsing_configuration```
+            - Description: Is a \<key\>:\<value\> based object that defines the table.
+                - \<key\> : column name of the resulting table
+                - \<value\>: defines the keys path of the value that we want to extract from evidence. you can use single list to get single value of multiple lists to get multiple value seperated by space.
+            - Example:
+                - single value extraction:
+                    ```json
+                    "id": [["user_details", "id"]]
+                    ```
+                - multiple value extraction:
+                    ```json
+                    "full name": [["user_details", "first_name"], ["user_details", "last_name"]]
+                    ```
+                
+####Example
+For evidence with the following data:
 ```json
 {
     "login_name": "anecdotes - exercise",
@@ -56,4 +80,25 @@ parser configuration is a json based structure which its keys are the table head
     }
 }
 ```
-you can use multiple keys in cases you need to union more that one value, as in ```full name``` attribute
+and with the following parsing configuration:
+```json
+{
+    "id": [["user_details", "id"]],
+    "full name": [["user_details", "first_name"], ["user_details", "last_name"]],
+    "email": [["user_details", "email"]],
+    "updated_at": [["user_details", "updated_at"]],
+    "MFA enabled": [["security", "mfa_enabled"]],
+    "MFA enforced": [["security", "mfa_enforced"]]
+}
+```
+the service will result this response:
+```json
+{
+    "MFA enabled": "True",
+    "MFA enforced": "True",
+    "email": "exercise @anecdotes.ai",
+    "full name": "anec dotes",
+    "id": 120000,
+    "updated_at": "2021 - 07 - 26 T09: 41: 56 Z"
+}
+```

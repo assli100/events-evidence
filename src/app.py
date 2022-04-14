@@ -1,6 +1,6 @@
 import logging
 from flask import Flask, request, Response, jsonify
-from parsers import parse_evidence, get_parser
+from parsers import parse_evidence
 
 app = Flask(__name__)
 
