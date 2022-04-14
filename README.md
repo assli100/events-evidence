@@ -1,25 +1,22 @@
-#Events Evidence Service
-
+# Events Evidence Service
+A simple service that generate table from a given data
 ## Prerequisites
 - Python 3.9
 ## Installation
 ```bash
 pip install -r requirements.txt
 ```
-
 ## Run the service
 ```bash
 python src\app.py
 ```
-
 ## Test with a client
 You can use the client_example.py script to feed the service.
 The script already has some data to use.
-
 ```bash
 python client_example.py
 ```
-##Service api specifications
+## Service api specifications
 - Protocol: ```HTTP```, Port: ```5000```
 - Paths:
     - /parse
@@ -60,7 +57,7 @@ python client_example.py
                     "full name": [["user_details", "first_name"], ["user_details", "last_name"]]
                     ```
                 
-####Example
+### Example
 For evidence with the following data:
 ```json
 {
