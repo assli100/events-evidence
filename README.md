@@ -1,25 +1,25 @@
 #Events Evidence Service
 
-### Prerequisites
+## Prerequisites
 - Python 3.9
-### Installation
+## Installation
 ```bash
 pip install -r requirements.txt
 ```
 
-### Run the service
+## Run the service
 ```bash
 python src\app.py
 ```
 
-### Test with a client
+## Test with a client
 You can use the client_example.py script to feed the service.
 The script already has some data to use.
 
 ```bash
 python client_example.py
 ```
-###Service api specifications
+##Service api specifications
 - Protocol: ```HTTP```, Port: ```5000```
 - Paths:
     - /parse
