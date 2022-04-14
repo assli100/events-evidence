@@ -19,8 +19,7 @@ The script already has some data to use.
 ```bash
 python client_example.py
 ```
-
-####Service api specifications
+###Service api specifications
 - Protocol: ```HTTP```, Port: ```5000```
 - Paths:
     - /parse
