@@ -1,6 +1,6 @@
 The motivation that led me choosing this parsing_congiuration design and implementation was that I tried to find the
 balance of service flexibility and easiness use of it. With this implementation, the service can handle almost any kind
-of evidence payload, the user supplies the value and fields that he needs to it db and service does it.
+of evidence payload, the user supplies the value and fields that he needs to its db and service does it.
 So as for:
 Step 1 - I kept it a simple service that has a focus on the parsing logic.
 Some ideas that I had in mind is to expand the api and, give the ability to users to upload their
@@ -10,4 +10,4 @@ Step 2 - As explained before, the service reads the parsing configuration from t
 
 Step 3 - Didn't test it with multiple solutions but another motivation for this implementation was to do it fast.
 The service only takes the values he needs from the evidence defined in the parsing configuration, he doesn't do
-comparison of keys or other operation that might slow it runtime.
+comparison of keys or other operation that might slow its runtime.

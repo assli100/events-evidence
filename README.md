@@ -1,5 +1,7 @@
 # Events Evidence Service
-A simple service that generate table from a given data
+A simple service that generate table from a given data.
+
+**My notes can be found in ```exercise_notes``` file
 ## Prerequisites
 - Python 3.9
 ## Installation
