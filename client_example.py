@@ -97,8 +97,10 @@ body["parsing_configuration"] = {
 
 body["payload"] = evidence_payload
 
-response = requests.post(url=url.format(SERVER_URL),
-                         json=body,
-                         headers={"Content-Type": "application/json"})
+response = requests.post(url=url, json=body, timeout=10)
 
-print(json.dumps(json.loads(response.content), indent=4))
+print("Status:", response.status_code)
+try:
+    print(json.dumps(response.json(), indent=4))
+except ValueError:
+    print(response.text)

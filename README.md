@@ -8,9 +8,13 @@ A simple service that generate table from a given data.
 ```bash
 pip install -r requirements.txt
 ```
+## Run the tests
+```bash
+python -m unittest discover -s tests
+```
 ## Run the service
 ```bash
-python src\app.py
+python src/app.py
 ```
 ## Test with a client
 You can use the client_example.py script to feed the service.
@@ -45,6 +49,7 @@ python client_example.py
                     "rows": <list of objects>
                 }
                 ```
+            - Errors: ```400``` with ```{"error": <message>}``` for a malformed request, ```500``` for an unexpected server error.
         - ```parsing_configuration```
             - Description: Is a \<key\>:\<value\> based object that defines the table.
                 - \<key\> : column name of the resulting table
@@ -58,6 +63,7 @@ python client_example.py
                     ```json
                     "full name": [["user_details", "first_name"], ["user_details", "last_name"]]
                     ```
+            - A path that doesn't exist in the evidence gives an empty string. List items can be read with an index, e.g. ```["groups", 0]```.
                 
 ### Example
 For evidence with the following data:
